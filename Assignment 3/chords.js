@@ -2,21 +2,19 @@
 
 var player;
 var angle = 0;
-var n = 7;
-var d = 6;
-var k;
-var mode = [7/6, 7/9, Math.E, 4/5, 3/4, 3/5, 3/8, 5/9]
+var i = 0, k;
+var mode = [1, 3, 2, 3/2, 5/3, 7/6, 7/9, 5/9, 3/5, 3/4, 4/5, 3/8, Math.E];
 
 function setup() {
 	createCanvas(window.innerWidth, window.innerHeight);
-	
+	background(0);
 	player = new Player(width/2, height/2);
 }
 
 
 function draw() {
-	background(0);
-	k = n/d;
+	// background(0);
+	k = mode[i];
 
 	translate(width/2, height/2);
 
@@ -42,10 +40,21 @@ function draw() {
 
 function keyPressed() {
     if (keyCode === UP_ARROW) {
-        n += 0.125;
-        print(n);
+    	background(0);
+        if (i === mode.length - 1) {
+        	i = 0;
+        }
+        else {
+        	i++;
+        }
     }
-    else if (keyCode === RIGHT_ARROW) {
-    	d += 0.125;
+    else if (keyCode === DOWN_ARROW) {
+    	background(0);
+    	if (i === 0) {
+        	i = mode.length - 1;
+        }
+        else {
+        	i--;
+        }
     }
 }
