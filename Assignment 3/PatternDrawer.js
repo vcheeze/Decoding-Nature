@@ -16,7 +16,8 @@ class PatternDrawer {
 
 		this.velocity.x = x - prev_x;
 		this.velocity.y = y - prev_y;
-		print(this.velocity.x, this.velocity.y);
+		// print(this.velocity.x, this.velocity.y);
+		print(this.position.x, this.position.y);
 	}
 
 	display() {
