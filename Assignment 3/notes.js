@@ -6,7 +6,7 @@ var i = 0, k;
 var mode = [1, 3, 2, 3/2, 5/3, 7/6, 7/9, 5/9, 3/5, 3/4, 4/5, 3/8, Math.E];
 var boxes = [];
 var soundType = [];
-var grid = false, noTrail = false;
+var grid = false, noTrail = true;
 
 function setup() {
 	createCanvas(window.innerWidth, window.innerHeight);
@@ -80,6 +80,20 @@ function checkBoxes() {
 }
 
 
+function eraseBoxes() {
+	for (var i = 0; i < boxes.length; i++) {
+		boxes[i].drawRect = false;
+	}
+}
+
+
+function showBoxes() {
+	for (var i = 0; i < boxes.length; i++) {
+		boxes[i].drawRect = true;
+	}
+}
+
+
 function keyPressed() {
     if (keyCode === UP_ARROW) {
     	background(0);
@@ -115,6 +129,10 @@ function keyPressed() {
     	}
     }
     else if (keyCode === 32) { // press space bar
+    	showBoxes();
     	noTrail = !noTrail;
+    	if (!noTrail) {
+    		eraseBoxes();
+    	}
     }
 }
