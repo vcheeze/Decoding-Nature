@@ -1,6 +1,6 @@
 // rose petal reference: https://en.wikipedia.org/wiki/File:Rose-rhodonea-curve-7x9-chart-improved.svg
 
-var player;
+var pDrawer;
 var angle = 0;
 var i = 0, k;
 var mode = [1, 3, 2, 3/2, 5/3, 7/6, 7/9, 5/9, 3/5, 3/4, 4/5, 3/8, Math.E];
@@ -8,7 +8,7 @@ var mode = [1, 3, 2, 3/2, 5/3, 7/6, 7/9, 5/9, 3/5, 3/4, 4/5, 3/8, Math.E];
 function setup() {
 	createCanvas(window.innerWidth, window.innerHeight);
 	background(0);
-	player = new Player(width/2, height/2);
+	pDrawer = new PatternDrawer(width/2, height/2);
 }
 
 
@@ -28,8 +28,8 @@ function draw() {
 
 	angle += 0.1;
 
-	player.update(x, y);
-	player.display();
+	pDrawer.update(x, y);
+	pDrawer.display();
 
 	// stroke(255);
 	// fill(255);

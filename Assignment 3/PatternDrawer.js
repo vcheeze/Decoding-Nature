@@ -1,6 +1,6 @@
 'use strict';
 
-class Player {
+class PatternDrawer {
 	constructor(x, y) {
 		this.position = createVector(x, y);
 		this.velocity = createVector(0, -1);
