@@ -1,24 +1,18 @@
-// rose petal reference: https://en.wikipedia.org/wiki/File:Rose-rhodonea-curve-7x9-chart-improved.svg
+// Make this into a game
+// 
 
 var pDrawer;
-var angle = 0;
 var i = 0, k;
-var mode = [1, 3, 2, 3/2, 5/3, 7/6, 7/9, 5/9, 3/5, 3/4, 4/5, 3/8, Math.E];
 var boxes = [];
 var soundType = [];
-var grid = false, noTrail = true;
+var grid = false;
 
 function setup() {
 	createCanvas(window.innerWidth, window.innerHeight);
-	background(0);
-	pDrawer = new PatternDrawer(0, 0);
+	pDrawer = new PatternDrawer();
 
-	// x coord: width/2 - 200 --> width/2 + 200
-	// y coord: height/2 + 200 --> height/2 -200
-	push();
-	translate(width/2, height/2);
-	for (var x = -200; x <= 200; x += 400/15) {
-		for (var y = -200; y <= 200; y += 400/15) {
+	for (var x = 400/15; x <= 400+400/15; x += 400/15) {
+		for (var y = 400/15; y <= 400+400/15; y += 400/15) {
 			var temp = new BoxPlayer(x, y);
 			boxes.push(temp);
 		}
@@ -26,35 +20,16 @@ function setup() {
 	if (grid) {
 		drawBoxes();
 	}
-	pop();
 	// print(boxes);
 }
 
 
 function draw() {
-	if (noTrail) {
-		background(0);
-		if (grid) {
-			push();
-			translate(width/2, height/2);
-			drawBoxes();
-			pop();
-		}
-	}
+	background(0);
+	var force = pDrawer.calculateAttraction();
+	pDrawer.applyForce(force);
 
-	k = mode[i];
-
-	translate(width/2, height/2);
-
-	var amplitude = 200;
-
-	var x = cos(k*angle) * cos(angle) * amplitude;
-	var y = cos(k*angle) * sin(angle) * amplitude;
-	// print(x, y);
-	
-	angle += 0.01;
-
-	pDrawer.update(x, y);
+	pDrawer.update();
 	pDrawer.display();
 
 	checkBoxes();
@@ -126,13 +101,6 @@ function keyPressed() {
     	}
     	else {
     		background(0);
-    	}
-    }
-    else if (keyCode === 32) { // press space bar
-    	showBoxes();
-    	noTrail = !noTrail;
-    	if (!noTrail) {
-    		eraseBoxes();
     	}
     }
 }

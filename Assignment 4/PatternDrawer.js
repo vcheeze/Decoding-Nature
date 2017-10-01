@@ -1,23 +1,42 @@
 'use strict';
 
 class PatternDrawer {
-	constructor(x, y) {
-		this.position = createVector(x, y);
-		this.velocity = createVector(0, -1);
-		this.r = 1;
+	constructor() {
+		this.position = createVector(width/2, height/2);
+		this.velocity = createVector(0, 0);
+		this.acceleration = createVector(0.1, 0.1);
+		this.r = 5;
 	}
 
-	update(x, y) {
-		let prev_x = this.position.x;
-		let prev_y = this.position.y;
+	calculateAttraction() {
+		let mouse = createVector(mouseX, mouseY);
+		let G = 1;
+		let mass = 50;
 
-		this.position.x = x;
-		this.position.y = y;
+		let force = p5.Vector.sub(mouse, this.position);
+		force.normalize();
+		let distance = p5.Vector.dist(mouse, this.position);
+		distance *= 0.5;
+		let strength = (distance * distance) / (G * mass * this.r);
+		force.mult(strength);
 
-		this.velocity.x = x - prev_x;
-		this.velocity.y = y - prev_y;
+		return force;
+	}
+
+	applyForce(force) {
+		let f = p5.Vector.div(force, this.r);
+		this.acceleration.add(f);
+	}
+
+	update() {
+		this.velocity.add(this.acceleration);
+		this.velocity.mult(0.75);
+		this.velocity.limit(5);
+		this.position.add(this.velocity);
+		this.acceleration.mult(0);
+
 		// print(this.velocity.x, this.velocity.y);
-		print(this.position.x, this.position.y);
+		// print(this.position.x, this.position.y);
 	}
 
 	display() {
