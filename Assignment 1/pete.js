@@ -29,6 +29,7 @@ function draw() {
     fill(color('#EF767A')); // F35F46 DE2130 E62B13
     noStroke();
     rect(0, 0, width/2, height);
+    pop();
 
 	pete.update();
 	pete.display();
