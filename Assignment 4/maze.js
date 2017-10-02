@@ -21,7 +21,7 @@ function draw() {
 	background(0);
 	noStroke();
 	fill(color('#68EDC6'))
-	rect(width-30, 0, 30, height);
+	rect(width-45, 0, 45, height);
 
 	var force = adventurer.calculateAttraction();
 	adventurer.applyForce(force);
@@ -89,5 +89,33 @@ function checkCollision() {
 function gameover() {
 	if (adventurer.position.x > width-30) {
 		return true;
+	}
+}
+
+function increaseVisibility() {
+	for (var i = 0; i < shapes.length; i++) {	
+		shapes[i].visibility += 10;
+		shapes[i].visibility = constrain(shapes[i].visibility, 25, 100);
+		shapes[i].modifyMaxDistance();
+	}
+}
+
+function decreaseVisibility() {
+	for (var i = 0; i < shapes.length; i++) {
+		shapes[i].visibility -= 10;
+		shapes[i].visibility = constrain(shapes[i].visibility, 25, 100);
+		shapes[i].modifyMaxDistance();
+	}
+}
+
+function keyPressed() {
+	if (keyCode == 32) {
+		init();
+	}
+	else if (keyCode == UP_ARROW) {
+		increaseVisibility();
+	}
+	else if (keyCode == DOWN_ARROW) {
+		decreaseVisibility();
 	}
 }

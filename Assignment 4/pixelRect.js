@@ -8,12 +8,17 @@ class pixelRect {
 		// this.y = height/2;
 		this.w = random(50, 200);
 		this.h = random(50, 200);
-		this.x = constrain(this.x, this.w, width-this.w);
+		this.x = constrain(this.x, this.w, width-this.w-45);
 		this.y = constrain(this.y, this.h, height-this.h);
 
-		this.maxDistance = dist(0, 0, 25, 25);
+		this.visibility = 25;
+		this.maxDistance = dist(0, 0, this.visibility, this.visibility);
 
 		this.shrink = random();
+	}
+
+	modifyMaxDistance() {
+		this.maxDistance = dist(0, 0, this.visibility, this.visibility);
 	}
 
 	collide(A) {
