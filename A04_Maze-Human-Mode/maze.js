@@ -1,3 +1,10 @@
+// first time trying to go to the right
+// second time trying to go to the left --> essentially flip everytime
+// the way to reset in human interaction mode is to bam let them die, and show all the boxes
+// only until the human goes back to the beginning area will the entire thing reset again
+
+
+
 var adventurer;
 var shapes = [];
 var collision;
@@ -6,8 +13,8 @@ var playing = false;
 
 
 function preload() {
-	collision = loadSound('assets/collision.mp3');
-	victory = loadSound('assets/victory.mp3');
+	collision = loadSound('collision.mp3');
+	victory = loadSound('victory.mp3');
 }
 
 
@@ -18,7 +25,7 @@ function setup() {
 
 
 function draw() {
-	background(0);
+	background(245);
 	noStroke();
 	fill(color('#68EDC6'))
 	rect(width-45, 0, 45, height);

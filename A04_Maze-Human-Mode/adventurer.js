@@ -41,8 +41,10 @@ class Adventurer {
 
 	display() {
 		let theta = this.velocity.heading() + radians(90);
-        fill(255);
-        stroke(200);
+        // fill(255);
+        // stroke(200);
+        fill(100);
+        stroke(0);
         push();
         translate(this.position.x, this.position.y);
         rotate(theta);
