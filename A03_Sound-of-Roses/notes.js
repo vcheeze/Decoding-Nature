@@ -52,7 +52,7 @@ function draw() {
 	var y = cos(k*angle) * sin(angle) * amplitude;
 	// print(x, y);
 	
-	angle += 0.10;
+	angle += 0.01;
 
 	pDrawer.update(x, y);
 	pDrawer.display();

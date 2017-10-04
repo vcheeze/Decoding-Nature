@@ -26,6 +26,7 @@ function setup() {
 
 function draw() {
 	background(245);
+	// background(0);
 	noStroke();
 	fill(color('#68EDC6'))
 	rect(width-45, 0, 45, height);

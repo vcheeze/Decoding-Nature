@@ -43,16 +43,16 @@ class pixelRect {
 				if (this.shrink < 0.2) {
 					if (distance < this.maxDistance && distance > 15) {
 						distance = map(distance, 0, this.maxDistance, 255, 0);				
-						// fill(distance);
-						fill(0);
+						fill(distance);
+						// fill(0);
 						point(x, y);
 					}
 				}
 				else {
 					if (distance < this.maxDistance) {
 						distance = map(distance, 0, this.maxDistance, 255, 0);				
-						// fill(distance);
-						fill(0);
+						fill(distance);
+						// fill(0);
 						point(x, y);
 					}
 				}

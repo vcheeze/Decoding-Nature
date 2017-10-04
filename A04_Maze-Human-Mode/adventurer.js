@@ -1,8 +1,13 @@
 'use strict';
 
 class Adventurer {
-	constructor() {
-		this.position = createVector(15, height/2);
+	constructor(rightMode) {
+		if (rightMode) {
+			this.position = createVector(15, height/2);
+		}
+		else {
+			this.position = createVector(width-15, height/2);
+		}
 		this.velocity = createVector(0, 0);
 		this.acceleration = createVector(0, 0);
 		this.r = 5;
@@ -34,17 +39,13 @@ class Adventurer {
 		this.velocity.limit(5);
 		this.position.add(this.velocity);
 		this.acceleration.mult(0);
-
-		// print(this.velocity.x, this.velocity.y);
-		// print(this.position.x, this.position.y);
 	}
 
+	// Draws lighter-colored adventurer
 	display() {
 		let theta = this.velocity.heading() + radians(90);
-        // fill(255);
-        // stroke(200);
         fill(100);
-        stroke(0);
+        stroke(200);
         push();
         translate(this.position.x, this.position.y);
         rotate(theta);
