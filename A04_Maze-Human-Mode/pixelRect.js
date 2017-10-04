@@ -6,11 +6,11 @@ class pixelRect {
 		this.h = random(50, 200);
 
 		if (rightMode) {
-			this.x = map(random(), 0, 1, 45, width-this.w-winZoneWidth);
+			this.x = map(random(), 0, 1, winZoneWidth, width-this.w-winZoneWidth);
 			this.y = map(random(), 0, 1, 0, height-this.h);
 		}
 		else {
-			this.x = map(random(), 0, 1, 0, width-winZoneWidth);
+			this.x = map(random(), 0, 1, winZoneWidth, width-this.w-winZoneWidth);
 			this.y = map(random(), 0, 1, 0, height-this.h);
 		}
 
@@ -51,13 +51,13 @@ class pixelRect {
 				let distance = Math.abs(p5.Vector.dist(A.position, position));
 				if (this.shrink < 0.15) {
 					if (distance < this.maxDistance && distance > 15) {
-						fill(0);
+						stroke(this.c);
 						point(x, y);
 					}
 				}
 				else {
 					if (distance < this.maxDistance) {
-						fill(0);
+						stroke(this.c);
 						point(x, y);
 					}
 				}
@@ -68,7 +68,7 @@ class pixelRect {
 	displayAll() {
 		for (let x = this.x; x <= this.x+this.w; x+=2) {
 			for (let y = this.y; y <= this.y+this.h; y+=2) {
-				fill(0);
+				stroke(this.c);
 				point(x, y);
 			}
 		}

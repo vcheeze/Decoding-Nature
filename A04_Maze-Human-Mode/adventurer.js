@@ -13,15 +13,14 @@ class Adventurer {
 		this.r = 5;
 	}
 
-	calculateAttraction() {
-		let mouse = createVector(mouseX, mouseY);
+	calculateAttraction(humanX, humanY) {
+		let human = createVector(humanX, humanY);
 		let G = 1;
 		let mass = 50;
 
-		let force = p5.Vector.sub(mouse, this.position);
+		let force = p5.Vector.sub(human, this.position);
 		force.normalize();
-		let distance = p5.Vector.dist(mouse, this.position);
-		distance *= 0.5;
+		let distance = p5.Vector.dist(human, this.position);
 		let strength = (distance * distance) / (G * mass * this.r);
 		force.mult(strength);
 
@@ -36,12 +35,11 @@ class Adventurer {
 	update() {
 		this.velocity.add(this.acceleration);
 		this.velocity.mult(0.75);
-		this.velocity.limit(5);
+		this.velocity.limit(20);
 		this.position.add(this.velocity);
 		this.acceleration.mult(0);
 	}
 
-	// Draws lighter-colored adventurer
 	display() {
 		let theta = this.velocity.heading() + radians(90);
         fill(100);
