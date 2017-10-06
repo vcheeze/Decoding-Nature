@@ -24,6 +24,7 @@ function preload() {
 
 function setup() {
 	createCanvas(window.innerWidth, window.innerHeight);
+	setupOsc(7500, 12000);
 	addColors();
 	init();
 }
