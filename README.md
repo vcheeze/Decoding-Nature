@@ -14,5 +14,9 @@ Pete (the circle) exists in a world of two zones. A Predator (the triangle) also
 
 Pete becomes bigger each time he is poked by the Predator. If he gets too big, he will explode and die.
 ### Assignment 2 - Magnet
+This assignment simulates a magnetic force. Since magnetic force is actually 3D, I had to transfer it somehow to 2D. I decided to make the magnetic field a scalar value instead of a vector, allowing the final force that is calculated to be a 2D vector.
+
+I've also simulated water using sin equations. There's a circle at the bottom of the water which attracts the other smaller circles moving around randomly (with Perlin noise) in the water. Once these random smaller circles enter the semicircle, which is the force-zone, then they will be pulled in to the circle at the bottom.
 ### Assignment 3 - Sound of Roses
+
 ### Assignment 4 - Maze
