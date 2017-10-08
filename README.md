@@ -20,3 +20,10 @@ I've also simulated water using sin equations. There's a circle at the bottom of
 ### Assignment 3 - Sound of Roses
 
 ### Assignment 4 - Maze
+
+### Midterm Assignment - Solar System
+Notes:
+* The planets have different densities, so their mass and diameters do not always correlate 1:1.
+  * The mass is used to calculate gravitational attraction
+  * The diameter is used to display the planets
+* Since the Sun's size is far too big compared to the planets, it is not in scale. However, the planets' sizes are.
