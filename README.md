@@ -27,3 +27,12 @@ Notes:
   * The mass is used to calculate gravitational attraction
   * The diameter is used to display the planets
 * Since the Sun's size is far too big compared to the planets, it is not in scale. However, the planets' sizes are.
+
+Sources:
+* General planetary data:
+  * https://www.windows2universe.org/our_solar_system/planets_orbits_table.html
+  * https://solarsystem.nasa.gov/docs/modelingsolarsystem_20070112.pdf
+* Orbital Inclination: https://en.wikipedia.org/wiki/Orbital_inclination
+* Conversion from polar to 3D coordinates:
+  * https://en.wikipedia.org/wiki/Spherical_coordinate_system
+  * http://tutorial.math.lamar.edu/Classes/CalcIII/SphericalCoords.aspx
