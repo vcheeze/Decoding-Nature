@@ -50,7 +50,7 @@ systems. The reason for doing so is that these particles will only show one the
 mover moves close enough to them. This means that the mover will have limited
 visibility as it moves through the maze.
 
-Using the UP and DOWN arrow keys, you can increase or decrease the visibility
+Using the **UP** and **DOWN** arrow keys, you can increase or decrease the visibility
 respectively.
 
 The goal of the game is simple: get to the other side, where there will be a
@@ -60,6 +60,15 @@ game will become increasingly hard.
 Good luck!
 
 ### Assignment 5 (Midterm) - Solar System
+For my midterm project, I created a simple simulation of the solar system. This
+is done in 3D, which was quite a challenge, as I wished to make as many elements
+in scale as possible. Since making everything in scale was impossible if I want
+to fit all the planets on the canvas and make them visible, I resorted to
+maintaining only the scale of the individual features/elements of the planets
+within themselves, i.e. the masses of the planets are in scale in respect to
+each other, but the masses are not in scale to their diameters or their
+distances from the Sun.
+
 Notes:
 * The planets have different densities, so their mass and diameters do not
 always correlate 1:1.
