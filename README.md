@@ -45,6 +45,19 @@ the grid so that the notes will only be triggered if the mover moves close
 enough to the center of the rectangles.
 
 ### Assignment 4 - Maze
+For this assignment, I designed a maze whose obstacles are actually particle
+systems. The reason for doing so is that these particles will only show one the
+mover moves close enough to them. This means that the mover will have limited
+visibility as it moves through the maze.
+
+Using the UP and DOWN arrow keys, you can increase or decrease the visibility
+respectively.
+
+The goal of the game is simple: get to the other side, where there will be a
+thin strip of area that has a different color. As you succeed each time, the
+game will become increasingly hard.
+
+Good luck!
 
 ### Assignment 5 (Midterm) - Solar System
 Notes:
