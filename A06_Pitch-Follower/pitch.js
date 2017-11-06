@@ -23,14 +23,19 @@ function setup() {
 
 function draw() {
 	background(51);
-	flock.run();
+
 
 	let micLevel = mic.getLevel();
+	print(micLevel);
+	micLevel = constrain(micLevel, 0.01, 0.55)
+	micLevel = map(micLevel, 0.01, 0.55, height, 0);
 	// print(micLevel);
-	micLevel = map(micLevel, 0, 0.7, 0, height);
 
 	let spectrum = fft.analyze();
 	let centroid = fft.getCentroid(); // get the spectral centroid of the sound
 	// print(centroid);
-	centroid = map(centroid, 40, 4000, 0, width); // what values are best?
+	centroid = constrain(centroid, 200, 4000);
+	centroid = map(centroid, 200, 4000, 0, width); // what values are best?
+
+	flock.run(centroid, micLevel);
 }

@@ -6,9 +6,9 @@ class Flock {
     this.boids = []; // Initialize the array
   }
 
-  run() {
+  run(pitch, amplitude) {
     for (var i = 0; i < this.boids.length; i++) {
-      this.boids[i].run(this.boids);  // Passing the entire list of boids to each boid individually
+      this.boids[i].run(this.boids, pitch, amplitude);  // Passing the entire list of boids to each boid individually
     }
   }
 
