@@ -87,3 +87,9 @@ Sources:
   * http://tutorial.math.lamar.edu/Classes/CalcIII/SphericalCoords.aspx
 
 ### Assignment 6 - Pitch Follower
+For this assignment, I simply followed Shiffman's implementation of a flock, and
+tried to extend it by controlling the flock with sound. More specifically, the
+frequency and amplitude of the sound controls the x and y coordinates,
+respectively. The x coordinate corresponds to the frequency, while the y
+coordinate is inversely related to the amplitude, so that the higher the volume,
+the higher the flock will go (mapping to a lower y value).
