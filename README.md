@@ -85,3 +85,5 @@ Sources:
 * Conversion from polar to 3D coordinates:
   * https://en.wikipedia.org/wiki/Spherical_coordinate_system
   * http://tutorial.math.lamar.edu/Classes/CalcIII/SphericalCoords.aspx
+
+### Assignment 6 - Pitch Follower
