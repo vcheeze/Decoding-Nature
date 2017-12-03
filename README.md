@@ -103,5 +103,10 @@ is mapped on a grayscale according to the ratio: (# of generations cell has been
 alive) / (total # of generations).
 
 ### Assignment 8
+For this assignment, I took Shiffman's implementation of the tree, and combined
+it with some elements from Assignment 2 - namely the water and the randomly
+moving "fish". I simply tweaked around the the L-system to implement a different
+set of rules so that the trees would look a bit more like seaweed, and then
+added the rest of the elements to that, to create a miniature sea world.
 
-## Assignment 9
+### Assignment 9
