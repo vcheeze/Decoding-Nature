@@ -93,3 +93,15 @@ frequency and amplitude of the sound controls the x and y coordinates,
 respectively. The x coordinate corresponds to the frequency, while the y
 coordinate is inversely related to the amplitude, so that the higher the volume,
 the higher the flock will go (mapping to a lower y value).
+
+### Assignment 7 - Historical Cellular Automata
+I only implemented simple tweaks in this assignment, where I take Shiffman's
+implementation of the classic CA, and changed the cells so that they keep a
+record of their states. More specifically, I change the color of the cell
+according to how often it has been alive up until the present moment. The color
+is mapped on a grayscale according to the ratio: (# of generations cell has been
+alive) / (total # of generations).
+
+### Assignment 8
+
+## Assignment 9
