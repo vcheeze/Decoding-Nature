@@ -5,7 +5,6 @@ var renderer;
 var dom;
 var sun;
 var universe;
-var universeSize = 75;
 var spaceShip;
 var starFields = [];
 
@@ -37,15 +36,17 @@ function createScene() {
   renderer.setSize( sceneWidth, sceneHeight );
   dom = document.getElementById( 'TutContainer' );
 	dom.appendChild( renderer.domElement );
-	addWorld();
-	addLight();
 
-	spaceShip = new SpaceShip(scene, 0, 0, 75);
+	universe = new Universe( scene, 75, 40 ); // scene, size, sides
+
+	spaceShip = new SpaceShip( scene, 0, 0, 75 );
 	let stars;
-	for (var i = 0; i < 4; i++) {
-		 stars = new StarField(scene);
-		 starFields.push(stars);
+	for ( let i = 0; i < 4; i++ ) {
+		 stars = new StarField( scene );
+		 starFields.push( stars );
 	}
+
+	addLight();
 
 	// camera.position.z = 10;
 	camera.position.z = 10;
@@ -59,44 +60,41 @@ function createScene() {
 	infoText.style.height = 100;
 	infoText.style.backgroundColor = "rgba(0, 0, 0, 0.75)";
 	infoText.style.color = "white";
-	infoText.innerHTML = "UP - Jump, Left/Right - Move";
+	infoText.innerHTML = "Game Instructions";
 	infoText.style.top = 10 + 'px';
 	infoText.style.left = 10 + 'px';
 	document.body.appendChild(infoText);
 }
 
 function handleKeyDown( keyEvent ) {
-	if ( keyEvent.keyCode === 37) { // left
+	if ( keyEvent.keyCode === 65) { // a: left
+		universe.mesh.rotateY( THREE.Math.degToRad(-1) );
+		let axis = new THREE.Vector3( 0, 1, 0 );
+		for ( let i = 0; i < starFields.length; i++ ) {
+			starFields[i].rotate( axis, THREE.Math.degToRad(-1) );
+		}
 	}
-	else if ( keyEvent.keyCode === 38) { // up
-
+	else if ( keyEvent.keyCode === 87) { // w: up
+		universe.mesh.rotateX( THREE.Math.degToRad(-1) );
+		let axis = new THREE.Vector3( 1, 0, 0 );
+		for ( let i = 0; i < starFields.length; i++ ) {
+			starFields[i].rotate( axis, THREE.Math.degToRad(-1) );
+		}
 	}
-	else if ( keyEvent.keyCode === 39 ) { // right
+	else if ( keyEvent.keyCode === 68 ) { // d: right
+		universe.mesh.rotateY(THREE.Math.degToRad(1));
+		let axis = new THREE.Vector3( 0, 1, 0 );
+		for ( let i = 0; i < starFields.length; i++ ) {
+			starFields[i].rotate( axis, THREE.Math.degToRad(1) );
+		}
 	}
-	else if ( keyEvent.keyCode === 40) { // down
-
+	else if ( keyEvent.keyCode === 83) { // s: down
+		universe.mesh.rotateX( THREE.Math.degToRad(1) );
+		let axis = new THREE.Vector3( 1, 0, 0 );
+		for ( let i = 0; i < starFields.length; i++ ) {
+			starFields[i].rotate( axis, THREE.Math.degToRad(1) );
+		}
 	}
-}
-
-function addWorld() {
-	var sides = 40;
-	var sphereGeometry = new THREE.SphereGeometry( universeSize, sides, sides );
-	var sphereMaterial = new THREE.MeshLambertMaterial({
-		color: 0x000000,
-		wireframe: true,
-		transparent: true,
-		opacity: 0.5
-	});
-
-	universe = new THREE.Mesh( sphereGeometry, sphereMaterial );
-	universe.material.side = THREE.DoubleSide;
-	universe.receiveShadow = true;
-	universe.castShadow = false;
-	// universe.rotation.z = -Math.PI/2;
-	scene.add( universe );
-	universe.position.set( 0, 0, 0 );
-	// universe.position.y = -24;
-	// universe.position.z = 2;
 }
 
 function addLight() {
