@@ -95,6 +95,18 @@ function handleKeyDown( keyEvent ) {
 			starFields[i].rotate( axis, THREE.Math.degToRad(1) );
 		}
 	}
+	else if ( keyEvent.keyCode === 71) { // g: forward
+		universe.mesh.position.z += 1;
+		for ( let i = 0; i < starFields.length; i++ ) {
+			starFields[i].move( true );
+		}
+	}
+	else if ( keyEvent.keyCode === 72) { // h: backward
+		universe.mesh.position.z -= 1;
+		for ( let i = 0; i < starFields.length; i++ ) {
+			starFields[i].move( false );
+		}
+	}
 }
 
 function addLight() {

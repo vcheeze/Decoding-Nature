@@ -36,15 +36,27 @@ class StarField {
 
   rotate( axis, theta ) {
     console.log("Rotating starfield!");
-    this.starField.geometry.verticesNeedUpdate = true;
-    let origin = new THREE.Vector3( 0, 0, 0 );
 
-    for ( let i = 0; i < this.starField.geometry.vertices.length; i ++ ) {
-      this.starField.geometry.vertices[i].sub( origin );
+    for ( let i = 0; i < this.starField.geometry.vertices.length; i++ ) {
       this.starField.geometry.vertices[i].applyAxisAngle( axis, theta );
-      this.starField.geometry.vertices[i].add( origin );
-      // this.starField.geometry.vertices[i].rotateOnAxis( axis, theta );
     }
+
+    this.starField.geometry.verticesNeedUpdate = true;
+  }
+
+  move( forward ) {
+    console.log("Moving starfield!");
+
+    for ( let i = 0; i < this.starField.geometry.vertices.length; i++ ) {
+      if ( forward ) {
+        this.starField.geometry.vertices[i].z += 1;
+      }
+      else {
+        this.starField.geometry.vertices[i].z -= 1;
+      }
+    }
+    
+    this.starField.geometry.verticesNeedUpdate = true;
   }
 
   collide( spaceship ) {
