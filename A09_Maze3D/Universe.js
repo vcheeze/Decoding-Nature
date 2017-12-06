@@ -1,3 +1,5 @@
+'use strict';
+
 class Universe {
   constructor( scene, size, sides ) {
     this.size = size;

@@ -6,11 +6,11 @@ class SpaceShip {
     this.y = y;
     this.z = y;
 
-    this.geometry = new THREE.ConeGeometry( 1.5, 4.5, 8 );
+    this.geometry = new THREE.ConeGeometry( 1, 4.5, 8 );
     this.material = new THREE.MeshLambertMaterial({
       // color: 0x000000,
-      color: 0x1FCF66,
-      wireframe: true
+      color: 0x1FCF66
+      // wireframe: true
     });
 
     this.mesh = new THREE.Mesh( this.geometry, this.material );
@@ -19,13 +19,5 @@ class SpaceShip {
     this.mesh.rotateX( THREE.Math.degToRad( -60 ) );
 
     scene.add( this.mesh );
-  }
-
-  update() {
-    this.material.needsUpdate = true;
-
-    this.x += x;
-    this.y += y;
-    this.z += z;
   }
 }
