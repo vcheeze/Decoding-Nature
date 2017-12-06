@@ -109,7 +109,7 @@ moving "fish". I simply tweaked around the the L-system to implement a different
 set of rules so that the trees would look a bit more like seaweed, and then
 added the rest of the elements to that, to create a miniature sea world.
 
-### Assignment 9 - Maze 3D
+### Assignment 9 (Final Project) - Maze 3D
 This assignment is part of our class final project, where the whole class would
 collaborate to create a world. For my portion, I want to try implementing a 3D
 version of Assignment 4.
