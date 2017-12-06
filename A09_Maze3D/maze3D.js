@@ -1,24 +1,30 @@
 /**
+ * @author vcheeze / https://github.com/vcheeze
  * Have the final rendezvous point always visible to the mover
  * so that the object will be clear.
  */
 
 'use strict';
 
-
-// var dom;
 // var sun;
-// var universe;
-// var spaceShip;
-// var starFields = [];
-//
-var camera, scene, renderer, controls;
-var dom;
-var objects = [];
-var raycaster;
-var universe;
 
-var maze = document.getElementById('Maze3D');
+var camera, scene, renderer, controls;
+var raycaster;
+
+var universe;
+var starFields = [];
+var spaceShip;
+
+var controlsEnabled = false;
+
+var moveForward = false;
+var moveBackward = false;
+var moveLeft = false;
+var moveRight = false;
+
+var prevTime = performance.now();
+var velocity = new THREE.Vector3();
+var direction = new THREE.Vector3();
 
 var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
 
@@ -29,10 +35,8 @@ if ( havePointerLock ) {
 		if ( document.pointerLockElement === element || document.mozPointerLockElement === element || document.webkitPointerLockElement === element ) {
 			controlsEnabled = true;
 			controls.enabled = true;
-			maze.style.display = 'none';
 		} else {
 			controls.enabled = false;
-			maze.style.display = 'block';
 		}
 	};
 
@@ -57,18 +61,6 @@ if ( havePointerLock ) {
 
 init();
 animate();
-
-var controlsEnabled = false;
-
-var moveForward = false;
-var moveBackward = false;
-var moveLeft = false;
-var moveRight = false;
-var canJump = false;
-
-var prevTime = performance.now();
-var velocity = new THREE.Vector3();
-var direction = new THREE.Vector3();
 
 function init() {
 	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
@@ -132,10 +124,14 @@ function init() {
 	renderer = new THREE.WebGLRenderer();
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
-	dom = document.getElementById('Maze3D');
-	dom.appendChild( renderer.domElement );
+	document.body.appendChild( renderer.domElement );
 
+	// create the universe
 	universe = new Universe( scene, 75, 40 ); // scene, size, sides
+	// create the stars fields
+	for ( let i = 0; i < 6; i++ ) {
+		 starFields.push( new StarField( scene ) );
+	}
 
 	window.addEventListener( 'resize', onWindowResize, false );
 
@@ -164,7 +160,7 @@ function animate() {
 	if ( controlsEnabled === true ) {
 		raycaster.ray.origin.copy( controls.getObject().position );
 		raycaster.ray.origin.y -= 10;
-		var intersections = raycaster.intersectObjects( objects );
+		var intersections = raycaster.intersectObjects( starFields );
 		var onObject = intersections.length > 0;
 		var time = performance.now();
 		var delta = ( time - prevTime ) / 1000;
@@ -178,7 +174,6 @@ function animate() {
 		if ( moveLeft || moveRight ) velocity.x -= direction.x * 400.0 * delta;
 		if ( onObject === true ) {
 			velocity.y = Math.max( 0, velocity.y );
-			canJump = true;
 		}
 		controls.getObject().translateX( velocity.x * delta );
 		controls.getObject().translateY( velocity.y * delta );
@@ -186,7 +181,6 @@ function animate() {
 		if ( controls.getObject().position.y < 10 ) {
 			velocity.y = 0;
 			controls.getObject().position.y = 10;
-			canJump = true;
 		}
 		prevTime = time;
 	}
@@ -201,9 +195,7 @@ function animate() {
 //   renderer.shadowMap.enabled = true; // enable shadow
 //   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 //
-// 	universe = new Universe( scene, 75, 40 ); // scene, size, sides
 //
-// 	spaceShip = new SpaceShip( scene, 0, 0, 75 );
 // 	let stars;
 // 	for ( let i = 0; i < 6; i++ ) {
 // 		 stars = new StarField( scene );

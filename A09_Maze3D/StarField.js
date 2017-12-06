@@ -1,7 +1,7 @@
 'use strict';
 
 class StarField {
-  constructor( scenen ) {
+  constructor( scene ) {
     this.position = new THREE.Vector3(
       THREE.Math.randInt( -30, 30 ),
       THREE.Math.randInt( -30, 30 ),
@@ -55,7 +55,7 @@ class StarField {
         this.starField.geometry.vertices[i].z -= 1;
       }
     }
-    
+
     this.starField.geometry.verticesNeedUpdate = true;
   }
 
