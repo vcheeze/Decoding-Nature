@@ -5,10 +5,7 @@
 
 'use strict';
 
-// var sceneWidth, sceneHeight;
-// var camera, scene;
-// var renderer;
-// var controls;
+
 // var dom;
 // var sun;
 // var universe;
@@ -16,8 +13,11 @@
 // var starFields = [];
 //
 var camera, scene, renderer, controls;
+var dom;
 var objects = [];
 var raycaster;
+var universe;
+
 var maze = document.getElementById('Maze3D');
 
 var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
@@ -72,6 +72,7 @@ var direction = new THREE.Vector3();
 
 function init() {
 	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
+	camera.position.z = 150;
 
 	scene = new THREE.Scene();
 	scene.background = new THREE.Color( 0xFFFFFF );
@@ -131,9 +132,25 @@ function init() {
 	renderer = new THREE.WebGLRenderer();
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
-	document.body.appendChild( renderer.domElement );
+	dom = document.getElementById('Maze3D');
+	dom.appendChild( renderer.domElement );
+
+	universe = new Universe( scene, 75, 40 ); // scene, size, sides
 
 	window.addEventListener( 'resize', onWindowResize, false );
+
+	// instruction text: how to play the game
+  let infoText = document.createElement('div');
+	infoText.style.position = 'absolute';
+	infoText.style.width = 100;
+	infoText.style.height = 100;
+	infoText.style.backgroundColor = "rgba(0, 0, 0, 0.75)";
+	infoText.style.color = "white";
+	infoText.style.fontFamily = "sans-serif";
+	infoText.innerHTML = "Game Instructions";
+	infoText.style.top = 10 + 'px';
+	infoText.style.left = 10 + 'px';
+	document.body.appendChild(infoText);
 }
 
 function onWindowResize() {
@@ -176,34 +193,13 @@ function animate() {
 	renderer.render( scene, camera );
 }
 
-// init();
-//
-// function init() {
-// 	// set up the scene
-// 	createScene();
-//
-// 	let controls = new THREE.OrbitControls( camera, renderer.domElement );
-// 	controls.maxPolarAngle = Math.PI * 0.5;
-// 	controls.minDistance = 10;
-// 	controls.maxDistance = 500;
-//
-// 	//call game loop
-// 	update();
-// }
-//
+
 // function createScene() {
-//   sceneWidth = window.innerWidth;
-//   sceneHeight = window.innerHeight;
-//   scene = new THREE.Scene();
 //   // scene.fog = new THREE.FogExp2( 0xf0fff0, 0.14 );
-//   camera = new THREE.PerspectiveCamera( 60, sceneWidth/sceneHeight, 0.1, 1000 ); // perspective camera
 //   renderer = new THREE.WebGLRenderer( { alpha: true } ); // renderer with transparent backdrop
 //   renderer.setClearColor( 0xfffafa, 1 );
 //   renderer.shadowMap.enabled = true; // enable shadow
 //   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-//   renderer.setSize( sceneWidth, sceneHeight );
-//   dom = document.getElementById( 'Maze3D' );
-// 	dom.appendChild( renderer.domElement );
 //
 // 	universe = new Universe( scene, 75, 40 ); // scene, size, sides
 //
@@ -220,21 +216,17 @@ function animate() {
 // 	window.addEventListener( 'resize', onWindowResize, false ); // resize callback
 //
 // 	document.onkeydown = handleKeyDown;
-//
-// 	// instruction text: how to play the game
-//   let infoText = document.createElement('div');
-// 	infoText.style.position = 'absolute';
-// 	infoText.style.width = 100;
-// 	infoText.style.height = 100;
-// 	infoText.style.backgroundColor = "rgba(0, 0, 0, 0.75)";
-// 	infoText.style.color = "white";
-// 	infoText.style.fontFamily = "sans-serif";
-// 	infoText.innerHTML = "Game Instructions";
-// 	infoText.style.top = 10 + 'px';
-// 	infoText.style.left = 10 + 'px';
-// 	document.body.appendChild(infoText);
 // }
-//
+
+
+
+
+
+
+
+
+
+
 // // keyboard controls
 // function handleKeyDown( keyEvent ) {
 // 	if ( keyEvent.keyCode === 65) { // a: left
@@ -278,7 +270,13 @@ function animate() {
 // 		}
 // 	}
 // }
-//
+
+
+
+
+
+
+
 // // add lighting
 // function addLight() {
 // 	let hemisphereLight = new THREE.HemisphereLight( 0xfffafa, 0x000000, 0.5 );
@@ -293,21 +291,12 @@ function animate() {
 // 	sun.shadow.camera.near = 0.5;
 // 	sun.shadow.camera.far = 50 ;
 // }
-//
+
 // function update() {
 //   render();
 // 	requestAnimationFrame( update ); // request next update
 // }
-//
+
 // function render() {
 //     renderer.render( scene, camera ); // draw
-// }
-//
-// function onWindowResize() {
-// 	// resize & align
-// 	sceneHeight = window.innerHeight;
-// 	sceneWidth = window.innerWidth;
-// 	renderer.setSize( sceneWidth, sceneHeight );
-// 	camera.aspect = sceneWidth / sceneHeight;
-// 	camera.updateProjectionMatrix();
 // }
