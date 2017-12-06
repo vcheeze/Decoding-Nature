@@ -1,7 +1,7 @@
 'use strict';
 
 class Star {
-  constructor() {
+  constructor( x, y, z ) {
   	this.geometry = new THREE.SphereGeometry( 5 );
   	this.material = new THREE.MeshLambertMaterial({
   		color: 0x000000,
@@ -13,7 +13,7 @@ class Star {
   	this.mesh.receiveShadow = true;
   	this.mesh.castShadow = true;
     this.mesh.material.side = THREE.DoubleSide
-    this.mesh.position.set( 0, 0, 0 );
+    this.mesh.position.set( x, y, z );
 
   }
 }

@@ -17,11 +17,7 @@ class StarField {
     for ( let i = 0; i < this.width; i++ ) {
       for ( let j = 0; j < this.height; j++ ) {
         for ( let k = 0; k < this.depth; k++ ) {
-          let star = new THREE.Vector3(
-            this.position.x + i,
-            this.position.y + j,
-            this.position.z + k
-          );
+          let star = new Star(i, j, k);
           this.starsGeometry.vertices.push( star );
         }
       }

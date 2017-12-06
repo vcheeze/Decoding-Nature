@@ -26,13 +26,17 @@ var prevTime = performance.now();
 var velocity = new THREE.Vector3();
 var direction = new THREE.Vector3();
 
-var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
+var havePointerLock = 'pointerLockElement' in document ||
+											'mozPointerLockElement' in document ||
+											'webkitPointerLockElement' in document;
 
 if ( havePointerLock ) {
 	let element = document.body;
 
 	let pointerlockchange = function( event ) {
-		if ( document.pointerLockElement === element || document.mozPointerLockElement === element || document.webkitPointerLockElement === element ) {
+		if ( document.pointerLockElement === element ||
+				 document.mozPointerLockElement === element ||
+				 document.webkitPointerLockElement === element ) {
 			controlsEnabled = true;
 			controls.enabled = true;
 		} else {
@@ -54,7 +58,9 @@ if ( havePointerLock ) {
 	document.addEventListener( 'webkitpointerlockerror', pointerlockerror, false );
 	document.addEventListener( 'click', function ( event ) {
 		// Ask the browser to lock the pointer
-		element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
+		element.requestPointerLock = element.requestPointerLock ||
+																 element.mozRequestPointerLock ||
+																 element.webkitRequestPointerLock;
 		element.requestPointerLock();
 	}, false );
 }
@@ -119,7 +125,7 @@ function init() {
 	// document.addEventListener( 'keydown', onKeyDown, false );
 	// document.addEventListener( 'keyup', onKeyUp, false );
 
-	raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
+	raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, -1, 0 ), 0, 10 );
 
 	renderer = new THREE.WebGLRenderer();
 	renderer.setPixelRatio( window.devicePixelRatio );
