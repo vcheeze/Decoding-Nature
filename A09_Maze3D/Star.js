@@ -2,7 +2,7 @@
 
 class Star {
   constructor( x, y, z ) {
-  	this.geometry = new THREE.SphereGeometry( 5 );
+  	this.geometry = new THREE.SphereGeometry( 1 );
   	this.material = new THREE.MeshLambertMaterial({
   		color: 0x000000,
   		transparent: true,
@@ -14,6 +14,5 @@ class Star {
   	this.mesh.castShadow = true;
     this.mesh.material.side = THREE.DoubleSide
     this.mesh.position.set( x, y, z );
-
   }
 }

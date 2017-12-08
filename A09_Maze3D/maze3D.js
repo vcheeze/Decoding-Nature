@@ -136,7 +136,8 @@ function init() {
 	universe = new Universe( scene, 75, 40 ); // scene, size, sides
 	// create the stars fields
 	for ( let i = 0; i < 6; i++ ) {
-		 starFields.push( new StarField( scene ) );
+		let starField = new StarField( scene );
+		starFields.push( starField.mesh );
 	}
 
 	window.addEventListener( 'resize', onWindowResize, false );
@@ -200,13 +201,6 @@ function animate() {
 //   renderer.setClearColor( 0xfffafa, 1 );
 //   renderer.shadowMap.enabled = true; // enable shadow
 //   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-//
-//
-// 	let stars;
-// 	for ( let i = 0; i < 6; i++ ) {
-// 		 stars = new StarField( scene );
-// 		 starFields.push( stars );
-// 	}
 //
 // 	addLight();
 //
