@@ -93,13 +93,10 @@
 							 document.webkitPointerLockElement === element ) {
 						controlsEnabled = true;
 						controls.enabled = true;
-
 						blocker.style.display = 'none';
 					} else {
 						controls.enabled = false;
-
 						blocker.style.display = 'block';
-
 						instructions.style.display = '';
 					}
 				};
@@ -121,7 +118,9 @@
 					instructions.style.display = 'none';
 
 					// Ask the browser to lock the pointer
-					element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
+					element.requestPointerLock = element.requestPointerLock ||
+																			 element.mozRequestPointerLock ||
+																			 element.webkitRequestPointerLock;
 					element.requestPointerLock();
 				}, false );
 			} else {
@@ -144,7 +143,7 @@
 				camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
 
 				scene = new THREE.Scene();
-				scene.background = new THREE.Color( 0xffffff );
+				scene.background = new THREE.Color( 0x111111 );
 				scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
 
 				var light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
@@ -153,6 +152,16 @@
 
 				controls = new THREE.PointerLockControls( camera );
 				scene.add( controls.getObject() );
+
+				// objects
+				// create the stars fields
+				for ( let i = 0; i < 5; i++ ) {
+					let starField = new StarField( scene );
+					starFields.push( starField.starField );
+				}
+				for(let i = 0; i < starFields.length; i++) {
+					console.log(starFields[i]);
+				}
 
 				let onKeyDown = function ( event ) {
 					switch ( event.keyCode ) {
@@ -169,6 +178,9 @@
 				let onKeyUp = function ( event ) {
 					switch( event.keyCode ) {
 						case 87: // w
+							// for(let i = 0; i < starFields.length; i++) {
+							// 	console.log(starFields[i]);
+							// }
 							moveForward = false;
 							break;
 
@@ -178,120 +190,70 @@
 					}
 				};
 
-				document.addEventListener( 'keydown', onKeyDown, false );
+				// document.addEventListener( 'keydown', onKeyDown, false );
 				document.addEventListener( 'keyup', onKeyUp, false );
 
 				raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, 0, -1 ), 0, 10 );
-
-				// objects
-				// create the stars fields
-				for ( let i = 0; i < 6; i++ ) {
-					let starField = new StarField( scene );
-					starFields.push( starField.starField );
-				}
-
-				// var boxGeometry = new THREE.BoxGeometry( 20, 20, 20 );
-        //
-				// for ( var i = 0, l = boxGeometry.faces.length; i < l; i ++ ) {
-        //
-				// 	var face = boxGeometry.faces[ i ];
-				// 	face.vertexColors[ 0 ] = new THREE.Color().setHSL( Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
-				// 	face.vertexColors[ 1 ] = new THREE.Color().setHSL( Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
-				// 	face.vertexColors[ 2 ] = new THREE.Color().setHSL( Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
-        //
-				// }
-        //
-				// for ( var i = 0; i < 500; i ++ ) {
-        //
-				// 	var boxMaterial = new THREE.MeshPhongMaterial( { specular: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors } );
-				// 	boxMaterial.color.setHSL( Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
-        //
-				// 	var box = new THREE.Mesh( boxGeometry, boxMaterial );
-				// 	box.position.x = Math.floor( Math.random() * 20 - 10 ) * 20;
-				// 	box.position.y = Math.floor( Math.random() * 20 ) * 20 + 10;
-				// 	box.position.z = Math.floor( Math.random() * 20 - 10 ) * 20;
-        //
-				// 	scene.add( box );
-				// 	objects.push( box );
-        //
-				// }
-
-				//
 
 				renderer = new THREE.WebGLRenderer();
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				document.body.appendChild( renderer.domElement );
 
-				//
-
 				window.addEventListener( 'resize', onWindowResize, false );
 
 			}
 
 			function onWindowResize() {
-
 				camera.aspect = window.innerWidth / window.innerHeight;
 				camera.updateProjectionMatrix();
-
 				renderer.setSize( window.innerWidth, window.innerHeight );
-
 			}
 
 			function animate() {
-
 				requestAnimationFrame( animate );
 
 				if ( controlsEnabled === true ) {
-
 					raycaster.ray.origin.copy( controls.getObject().position );
 					raycaster.ray.origin.y -= 10;
 
 					var intersections = raycaster.intersectObjects( starFields );
 
-					var onObject = intersections.length > 0;
+					var collided = intersections.length > 0;
 
 					var time = performance.now();
 					var delta = ( time - prevTime ) / 1000;
 
-					velocity.x -= velocity.x * 10.0 * delta;
 					velocity.z -= velocity.z * 10.0 * delta;
 
-					velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
 
 					direction.z = Number( moveForward ) - Number( moveBackward );
-					// direction.x = Number( moveLeft ) - Number( moveRight );
 					direction.normalize(); // this ensures consistent movements in all directions
 
-					if ( moveForward || moveBackward ) velocity.z -= direction.z * 400.0 * delta;
-					// if ( moveLeft || moveRight ) velocity.x -= direction.x * 400.0 * delta;
-
-					if ( onObject === true ) {
-
-						velocity.y = Math.max( 0, velocity.y );
-						canJump = true;
-
+					if ( moveForward || moveBackward ) {
+						velocity = controls.getDirection();
+						velocity.normalize();
+						velocity.x -= direction.x * 400.0 * delta;
+						velocity.y -= direction.y * 400.0 * delta;
+						velocity.z -= direction.z * 400.0 * delta;
 					}
+
+
+
 
 					controls.getObject().translateX( velocity.x * delta );
 					controls.getObject().translateY( velocity.y * delta );
 					controls.getObject().translateZ( velocity.z * delta );
 
 					if ( controls.getObject().position.y < 10 ) {
-
 						velocity.y = 0;
 						controls.getObject().position.y = 10;
-
-						canJump = true;
-
 					}
 
 					prevTime = time;
 
 				}
-
 				renderer.render( scene, camera );
-
 			}
 
 		</script>

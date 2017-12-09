@@ -3,9 +3,9 @@
 class StarField {
   constructor( scene ) {
     this.position = new THREE.Vector3(
-      THREE.Math.randInt( -50, 30 ),
-      THREE.Math.randInt( -50, 30 ),
-      THREE.Math.randInt( -50, 30 )
+      THREE.Math.randInt( -10, 10 ),
+      THREE.Math.randInt( -10, 10 ),
+      THREE.Math.randInt( -210, -10 )
     );
 
     this.width  = THREE.Math.randInt( 5, 25 );
@@ -13,9 +13,9 @@ class StarField {
     this.depth  = THREE.Math.randInt( 5, 25 );
 
     this.starsGeometry = new THREE.Geometry();
-    for ( let i = 0; i < this.width; i++ ) {
-      for ( let j = 0; j < this.height; j++ ) {
-        for ( let k = 0; k < this.depth; k++ ) {
+    for ( let i = 0; i < this.width; i += 2 ) {
+      for ( let j = 0; j < this.height; j += 2 ) {
+        for ( let k = 0; k < this.depth; k += 2 ) {
           let star = new THREE.Vector3(
             this.position.x + i,
             this.position.y + j,
@@ -27,7 +27,7 @@ class StarField {
     }
     this.starsGeometry.computeBoundingBox();
 
-    this.starsMaterial = new THREE.PointsMaterial( {color: 0xE07B11} );
+    this.starsMaterial = new THREE.PointsMaterial( {color: 0xefefef /*E07B11*/} );
 
     this.starField = new THREE.Points( this.starsGeometry, this.starsMaterial );
 

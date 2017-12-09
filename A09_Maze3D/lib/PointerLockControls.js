@@ -26,28 +26,44 @@ THREE.PointerLockControls = function ( camera ) {
 
 		var movementX, movementY;
 
-		if ( keyEvent.keyCode === 65) { // a: left
+		if ( keyEvent.keyCode === 37) { // a: left
 			movementX = -5;
 			movementY = 0;
+			yawObject.rotation.y -= movementX * 0.002;
+			pitchObject.rotation.x -= movementY * 0.002;
+
+			pitchObject.rotation.x = Math.max( -PI_2, Math.min( PI_2, pitchObject.rotation.x ) );
 		}
-		else if ( keyEvent.keyCode === 87) { // w: up
+		else if ( keyEvent.keyCode === 38 /*87*/) { // w: up
 			movementX = 0;
 			movementY = -5;
+			yawObject.rotation.y -= movementX * 0.002;
+			pitchObject.rotation.x -= movementY * 0.002;
+
+			pitchObject.rotation.x = Math.max( -PI_2, Math.min( PI_2, pitchObject.rotation.x ) );
 		}
-		else if ( keyEvent.keyCode === 68 ) { // d: right
+		else if ( keyEvent.keyCode === 39 ) { // d: right
 			movementX = 5;
 			movementY = 0;
+			yawObject.rotation.y -= movementX * 0.002;
+			pitchObject.rotation.x -= movementY * 0.002;
+
+			pitchObject.rotation.x = Math.max( -PI_2, Math.min( PI_2, pitchObject.rotation.x ) );
 		}
-		else if ( keyEvent.keyCode === 83) { // s: down
+		else if ( keyEvent.keyCode === 40 /*83*/) { // s: down
 			movementX = 0;
 			movementY = 5;
+			yawObject.rotation.y -= movementX * 0.002;
+			pitchObject.rotation.x -= movementY * 0.002;
+
+			pitchObject.rotation.x = Math.max( -PI_2, Math.min( PI_2, pitchObject.rotation.x ) );
 		}
-
-		yawObject.rotation.y -= movementX * 0.002;
-		pitchObject.rotation.x -= movementY * 0.002;
-
-		pitchObject.rotation.x = Math.max( - PI_2, Math.min( PI_2, pitchObject.rotation.x ) );
-
+		else if ( keyEvent.keyCode === 83 ) {
+			moveBackward = true;
+		}
+		else if ( keyEvent.keyCode === 87 ) {
+			moveForward = true;
+		}
 	};
 
 	this.dispose = function() {
@@ -73,10 +89,11 @@ THREE.PointerLockControls = function ( camera ) {
 		var direction = new THREE.Vector3( 0, 0, - 1 );
 		var rotation = new THREE.Euler( 0, 0, 0, "YXZ" );
 
-		return function( v ) {
+		return function() {
 
 			rotation.set( pitchObject.rotation.x, yawObject.rotation.y, 0 );
 
+			v = new THREE.Vector3();
 			v.copy( direction ).applyEuler( rotation );
 
 			return v;
