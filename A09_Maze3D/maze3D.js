@@ -82,48 +82,6 @@ function init() {
 
 	controls = new THREE.PointerLockControls( camera );
 	scene.add( controls.getObject() );
-	let onKeyDown = function ( event ) {
-		switch ( event.keyCode ) {
-			case 38: // up
-			case 87: // w
-				moveForward = true;
-				break;
-			case 37: // left
-			case 65: // a
-				moveLeft = true;
-				break;
-			case 40: // down
-			case 83: // s
-				moveBackward = true;
-				break;
-			case 39: // right
-			case 68: // d
-				moveRight = true;
-				break;
-		}
-	};
-	let onKeyUp = function ( event ) {
-		switch( event.keyCode ) {
-			case 38: // up
-			case 87: // w
-				moveForward = false;
-				break;
-			case 37: // left
-			case 65: // a
-				moveLeft = false;
-				break;
-			case 40: // down
-			case 83: // s
-				moveBackward = false;
-				break;
-			case 39: // right
-			case 68: // d
-				moveRight = false;
-				break;
-		}
-	};
-	// document.addEventListener( 'keydown', onKeyDown, false );
-	// document.addEventListener( 'keyup', onKeyUp, false );
 
 	raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, -1, 0 ), 0, 10 );
 
@@ -167,7 +125,7 @@ function animate() {
 	if ( controlsEnabled === true ) {
 		raycaster.ray.origin.copy( controls.getObject().position );
 		raycaster.ray.origin.y -= 10;
-		var intersections = raycaster.intersectObjects( starFields );
+		var intersections = raycaster.intersectObjects();
 		var onObject = intersections.length > 0;
 		var time = performance.now();
 		var delta = ( time - prevTime ) / 1000;
