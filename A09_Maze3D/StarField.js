@@ -3,14 +3,14 @@
 class StarField {
   constructor( scene ) {
     this.position = new THREE.Vector3(
-      THREE.Math.randInt( -10, 10 ),
-      THREE.Math.randInt( -10, 10 ),
-      THREE.Math.randInt( -210, -10 )
+      THREE.Math.randInt( -window.innerWidth/4, window.innerWidth/4 ),
+      THREE.Math.randInt( -window.innerHeight/4, window.innerHeight/4 ),
+      THREE.Math.randInt( -225, -100 )
     );
 
-    this.width  = THREE.Math.randInt( 5, 25 );
-    this.height = THREE.Math.randInt( 5, 25 );
-    this.depth  = THREE.Math.randInt( 5, 25 );
+    this.width  = THREE.Math.randInt( 10, 100 );
+    this.height = THREE.Math.randInt( 10, 100 );
+    this.depth  = THREE.Math.randInt( 10, 100 );
 
     this.starsGeometry = new THREE.Geometry();
     for ( let i = 0; i < this.width; i += 2 ) {

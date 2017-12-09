@@ -9,10 +9,7 @@ class Path {
   	});
 
   	this.mesh = new THREE.Mesh( this.geometry, this.material );
-  	// this.mesh.receiveShadow = true;
-  	// this.mesh.castShadow = false;
-    // this.mesh.material.side = THREE.DoubleSide
-    // this.mesh.position.set( 0, 0, -250 );
+    this.mesh.position.set( 0, 0, 0 );
 
   	scene.add( this.mesh );
   }

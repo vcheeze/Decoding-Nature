@@ -72,7 +72,7 @@ THREE.PointerLockControls = function ( camera ) {
 
 	};
 
-	document.addEventListener( 'keydown', onKeyDown, false );
+	// document.addEventListener( 'keydown', onKeyDown, false );
 
 	this.enabled = false;
 
