@@ -58,6 +58,7 @@
 		<script src="lib/three.min.js"></script>
 		<script src="lib/PointerLockControls.js"></script>
 		<script src="StarField.js"></script>
+		<script src="Target.js"></script>
 
 		<div id="blocker">
 
@@ -74,6 +75,7 @@
 			var camera, scene, renderer, controls;
 
 			var starFields = [];
+			var target;
 
 			var raycaster;
 
@@ -159,9 +161,8 @@
 					let starField = new StarField( scene );
 					starFields.push( starField.starField );
 				}
-				for(let i = 0; i < starFields.length; i++) {
-					console.log(starFields[i]);
-				}
+
+				target = new Target( scene );
 
 				let onKeyDown = function ( event ) {
 					switch ( event.keyCode ) {
@@ -233,22 +234,19 @@
 					if ( moveForward || moveBackward ) {
 						velocity = controls.getDirection();
 						velocity.normalize();
-						velocity.x -= direction.x * 400.0 * delta;
-						velocity.y -= direction.y * 400.0 * delta;
-						velocity.z -= direction.z * 400.0 * delta;
+						velocity.x -= direction.x * 800.0 * delta;
+						velocity.y -= direction.y * 800.0 * delta;
+						velocity.z -= direction.z * 800.0 * delta;
 					}
-
-
-
 
 					controls.getObject().translateX( velocity.x * delta );
 					controls.getObject().translateY( velocity.y * delta );
 					controls.getObject().translateZ( velocity.z * delta );
 
-					if ( controls.getObject().position.y < 10 ) {
-						velocity.y = 0;
-						controls.getObject().position.y = 10;
-					}
+					// if ( controls.getObject().position.y < 10 ) {
+					// 	velocity.y = 0;
+					// 	controls.getObject().position.y = 10;
+					// }
 
 					prevTime = time;
 
