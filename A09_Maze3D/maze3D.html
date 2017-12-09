@@ -56,7 +56,7 @@
 	</head>
 	<body>
 		<script src="lib/three.min.js"></script>
-		<!-- <script src="lib/PointerLockControls.js"></script> -->
+		<script src="lib/PointerLockControls.js"></script>
 		<script src="Path.js"></script>
 		<script src="StarField.js"></script>
 		<script src="Target.js"></script>
@@ -152,7 +152,6 @@
 
 				scene = new THREE.Scene();
 				scene.background = new THREE.Color( 0x111111 );
-				scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
 
 				var light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
 				light.position.set( 0.5, 1, 0.75 );
@@ -164,13 +163,14 @@
 				new Path( scene );
 
 				// create the stars fields
-				for ( let i = 0; i < 25; i++ ) {
+				for ( let i = 0; i < 1; i++ ) {
 					let starField = new StarField( scene );
-					starFields.push( starField.starField );
+					starFields.push( starField );
 				}
 
-				target = new Target( scene );
+				console.log(starFields[0]);
 
+				target = new Target( scene );
 
 				let onKeyDown = function ( event ) {
 					switch ( event.keyCode ) {
@@ -255,9 +255,9 @@
 					raycaster.ray.origin.copy( controls.getObject().position );
 					// raycaster.ray.origin.y -= 10;
 
-					var intersections = raycaster.intersectObjects( starFields );
+					// var intersections = raycaster.intersectObjects( starFields );
 
-					var collided = intersections.length > 0;
+					// var collided = intersections.length > 0;
 
 					var time = performance.now();
 					var delta = ( time - prevTime ) / 1000;
@@ -284,6 +284,10 @@
 					controls.getObject().translateX( velocity.x * delta );
 					controls.getObject().translateY( velocity.y * delta );
 					controls.getObject().translateZ( velocity.z * delta );
+
+					// for ( let i = 0; i < starFields.length; i++ ) {
+					// 	starFields[i].showStars( controls.getObject() );
+					// }
 
 					prevTime = time;
 

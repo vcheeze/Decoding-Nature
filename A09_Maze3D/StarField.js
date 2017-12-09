@@ -13,6 +13,7 @@ class StarField {
     this.depth  = THREE.Math.randInt( 10, 100 );
 
     this.starsGeometry = new THREE.Geometry();
+    this.candidates = [];
     for ( let i = 0; i < this.width; i += 2 ) {
       for ( let j = 0; j < this.height; j += 2 ) {
         for ( let k = 0; k < this.depth; k += 2 ) {
@@ -21,6 +22,7 @@ class StarField {
             this.position.y + j,
             this.position.z + k
           );
+          // this.candidates.push( star );
           this.starsGeometry.vertices.push( star );
         }
       }
@@ -33,33 +35,19 @@ class StarField {
 
     scene.add( this.starField );
   }
-  //
-  // rotate( axis, theta ) {
-  //   console.log("Rotating starfield!");
-  //
-  //   for ( let i = 0; i < this.starField.geometry.vertices.length; i++ ) {
-  //     this.starField.geometry.vertices[i].applyAxisAngle( axis, theta );
-  //   }
-  //
-  //   this.starField.geometry.verticesNeedUpdate = true;
-  // }
-  //
-  // move( forward ) {
-  //   console.log("Moving starfield!");
-  //
-  //   for ( let i = 0; i < this.starField.geometry.vertices.length; i++ ) {
-  //     if ( forward ) {
-  //       this.starField.geometry.vertices[i].z += 1;
-  //     }
-  //     else {
-  //       this.starField.geometry.vertices[i].z -= 1;
-  //     }
-  //   }
-  //
-  //   this.starField.geometry.verticesNeedUpdate = true;
-  // }
-  //
-  // collide( spaceship ) {
-  //
-  // }
+
+  // display the points if the user gets close enough to them
+  showStars( player ) {
+    let distance;
+
+    for ( let i = 0; i < this.candidates.length; i++ ) {
+      distance = player.position.distanceTo( this.candidates[i] );
+      console.log(distance);
+      if ( distance < 300 ) {
+        this.starsGeometry.vertices.push( this.candidates[i] );
+      }
+    }
+
+    this.starsGeometry.verticesNeedUpdate = true;
+  }
 }
