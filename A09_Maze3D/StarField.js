@@ -25,7 +25,7 @@ class StarField {
         }
       }
     }
-    // this.starsGeometry.computeBoundingBox();
+    this.starsGeometry.computeBoundingBox();
 
     this.starsMaterial = new THREE.PointsMaterial( {color: 0xE07B11} );
 
