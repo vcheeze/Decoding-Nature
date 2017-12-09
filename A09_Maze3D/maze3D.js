@@ -95,7 +95,7 @@ function init() {
 	// create the stars fields
 	for ( let i = 0; i < 6; i++ ) {
 		let starField = new StarField( scene );
-		starFields.push( starField.mesh );
+		starFields.push( starField.starField );
 	}
 
 	window.addEventListener( 'resize', onWindowResize, false );
@@ -125,7 +125,8 @@ function animate() {
 	if ( controlsEnabled === true ) {
 		raycaster.ray.origin.copy( controls.getObject().position );
 		raycaster.ray.origin.y -= 10;
-		var intersections = raycaster.intersectObjects();
+		console.log(starFields);
+		var intersections = raycaster.intersectObjects( starFields );
 		var onObject = intersections.length > 0;
 		var time = performance.now();
 		var delta = ( time - prevTime ) / 1000;
