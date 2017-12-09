@@ -26,13 +26,17 @@ var prevTime = performance.now();
 var velocity = new THREE.Vector3();
 var direction = new THREE.Vector3();
 
-var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
+var havePointerLock = 'pointerLockElement' in document ||
+											'mozPointerLockElement' in document ||
+											'webkitPointerLockElement' in document;
 
 if ( havePointerLock ) {
 	let element = document.body;
 
 	let pointerlockchange = function( event ) {
-		if ( document.pointerLockElement === element || document.mozPointerLockElement === element || document.webkitPointerLockElement === element ) {
+		if ( document.pointerLockElement === element ||
+				 document.mozPointerLockElement === element ||
+				 document.webkitPointerLockElement === element ) {
 			controlsEnabled = true;
 			controls.enabled = true;
 		} else {
@@ -54,7 +58,9 @@ if ( havePointerLock ) {
 	document.addEventListener( 'webkitpointerlockerror', pointerlockerror, false );
 	document.addEventListener( 'click', function ( event ) {
 		// Ask the browser to lock the pointer
-		element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
+		element.requestPointerLock = element.requestPointerLock ||
+																 element.mozRequestPointerLock ||
+																 element.webkitRequestPointerLock;
 		element.requestPointerLock();
 	}, false );
 }
@@ -76,50 +82,8 @@ function init() {
 
 	controls = new THREE.PointerLockControls( camera );
 	scene.add( controls.getObject() );
-	let onKeyDown = function ( event ) {
-		switch ( event.keyCode ) {
-			case 38: // up
-			case 87: // w
-				moveForward = true;
-				break;
-			case 37: // left
-			case 65: // a
-				moveLeft = true;
-				break;
-			case 40: // down
-			case 83: // s
-				moveBackward = true;
-				break;
-			case 39: // right
-			case 68: // d
-				moveRight = true;
-				break;
-		}
-	};
-	let onKeyUp = function ( event ) {
-		switch( event.keyCode ) {
-			case 38: // up
-			case 87: // w
-				moveForward = false;
-				break;
-			case 37: // left
-			case 65: // a
-				moveLeft = false;
-				break;
-			case 40: // down
-			case 83: // s
-				moveBackward = false;
-				break;
-			case 39: // right
-			case 68: // d
-				moveRight = false;
-				break;
-		}
-	};
-	// document.addEventListener( 'keydown', onKeyDown, false );
-	// document.addEventListener( 'keyup', onKeyUp, false );
 
-	raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
+	raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, -1, 0 ), 0, 10 );
 
 	renderer = new THREE.WebGLRenderer();
 	renderer.setPixelRatio( window.devicePixelRatio );
@@ -130,7 +94,8 @@ function init() {
 	universe = new Universe( scene, 75, 40 ); // scene, size, sides
 	// create the stars fields
 	for ( let i = 0; i < 6; i++ ) {
-		 starFields.push( new StarField( scene ) );
+		let starField = new StarField( scene );
+		starFields.push( starField.starField );
 	}
 
 	window.addEventListener( 'resize', onWindowResize, false );
@@ -160,6 +125,7 @@ function animate() {
 	if ( controlsEnabled === true ) {
 		raycaster.ray.origin.copy( controls.getObject().position );
 		raycaster.ray.origin.y -= 10;
+		console.log(starFields);
 		var intersections = raycaster.intersectObjects( starFields );
 		var onObject = intersections.length > 0;
 		var time = performance.now();
@@ -194,13 +160,6 @@ function animate() {
 //   renderer.setClearColor( 0xfffafa, 1 );
 //   renderer.shadowMap.enabled = true; // enable shadow
 //   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-//
-//
-// 	let stars;
-// 	for ( let i = 0; i < 6; i++ ) {
-// 		 stars = new StarField( scene );
-// 		 starFields.push( stars );
-// 	}
 //
 // 	addLight();
 //
