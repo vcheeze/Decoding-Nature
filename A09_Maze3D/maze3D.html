@@ -66,7 +66,7 @@
 			<div id="instructions">
 				<span style="font-size:40px">Click to play</span>
 				<br />
-				(UP, DOWN, RIGHT, LEFT = Look around, W, S = Move)
+				(ARROWS = Forward / backward / left / right, W / S = up / down)
 			</div>
 
 		</div>
@@ -145,6 +145,8 @@
 			var prevTime = performance.now();
 			var velocity = new THREE.Vector3();
 			var direction = new THREE.Vector3();
+
+			var isGameOver = false;
 
 			function init() {
 				camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
@@ -282,6 +284,9 @@
 					// for ( let i = 0; i < starFields.length; i++ ) {
 					// 	starFields[i].showStars( controls.getObject() );
 					// }
+
+					isGameOver = target.isGameOver( controls.getObject() );
+					console.log(isGameOver);
 
 					prevTime = time;
 

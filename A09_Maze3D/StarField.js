@@ -2,11 +2,13 @@
 
 class StarField {
   constructor( scene ) {
-    this.position = new THREE.Vector3(
-      THREE.Math.randInt( -window.innerWidth/4, window.innerWidth/4 ),
-      THREE.Math.randInt( -window.innerHeight/4, window.innerHeight/4 ),
-      THREE.Math.randInt( -225, -100 )
-    );
+    // this.position = new THREE.Vector3(
+    //   THREE.Math.randInt( -window.innerWidth/4, window.innerWidth/4 ),
+    //   THREE.Math.randInt( -window.innerHeight/4, window.innerHeight/4 ),
+    //   THREE.Math.randInt( -225, -100 )
+    // );
+
+    this.position = new THREE.Vector3( 0, 0, -25 );
 
     this.width  = THREE.Math.randInt( 10, 100 );
     this.height = THREE.Math.randInt( 10, 100 );
@@ -42,12 +44,20 @@ class StarField {
 
     for ( let i = 0; i < this.candidates.length; i++ ) {
       distance = player.position.distanceTo( this.candidates[i] );
-      console.log(distance);
-      if ( distance < 300 ) {
-        this.starsGeometry.vertices.push( this.candidates[i] );
+      if ( distance < 500 ) {
+        this.starsGeometry.vertices[i] = this.candidates[i];
+      }
+    }
+
+    for ( let i = 0; i < this.starsGeometry.vertices.length; i++ ) {
+      distance = player.position.distanceTo( this.starsGeometry.vertices[i] );
+      if ( distance < 500 ) {
+        
       }
     }
 
     this.starsGeometry.verticesNeedUpdate = true;
+
+    // console.log(this.starField);
   }
 }
