@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>three.js - pointerlock controls</title>
+		<title>Maze3D</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<style>
@@ -150,7 +150,8 @@
 
 			function init() {
 				camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
-				camera.position.z = 100;
+				// camera.position.z = 100;
+				camera.position.set( 0, 0, 0 );
 
 				scene = new THREE.Scene();
 				scene.background = new THREE.Color( 0x111111 );
@@ -165,12 +166,10 @@
 				new Path( scene );
 
 				// create the stars fields
-				for ( let i = 0; i < 1; i++ ) {
+				for ( let i = 0; i < 10; i++ ) {
 					let starField = new StarField( scene );
 					starFields.push( starField );
 				}
-
-				console.log(starFields[0]);
 
 				target = new Target( scene );
 
@@ -282,11 +281,11 @@
 					controls.getObject().translateZ( velocity.z * delta );
 
 					// for ( let i = 0; i < starFields.length; i++ ) {
-					// 	starFields[i].showStars( controls.getObject() );
+					// 	starFields[i].processPlayerDistance( controls.getObject() );
 					// }
 
 					isGameOver = target.isGameOver( controls.getObject() );
-					console.log(isGameOver);
+					// console.log(isGameOver);
 
 					prevTime = time;
 

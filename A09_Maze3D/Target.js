@@ -12,7 +12,7 @@ class Target {
   	this.mesh.receiveShadow = true;
   	this.mesh.castShadow = false;
     this.mesh.material.side = THREE.DoubleSide
-    this.mesh.position.set( 0, 0, -150 );
+    this.mesh.position.set( 0, 0, -350 );
 
   	scene.add( this.mesh );
   }
