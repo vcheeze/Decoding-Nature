@@ -173,7 +173,7 @@
 				path = new Path( scene );
 
 				// create the stars fields
-				for ( let i = 0; i < 1; i++ ) {
+				for ( let i = 0; i < 25; i++ ) {
 					let starField = new StarField( scene );
 					starFields.push( starField );
 				}
@@ -270,7 +270,7 @@
 				path = new Path( scene );
 
 				// create the stars fields
-				for ( let i = 0; i < 1; i++ ) {
+				for ( let i = 0; i < 25; i++ ) {
 					let starField = new StarField( scene );
 					starFields.push( starField );
 				}
@@ -323,7 +323,7 @@
 
 					done = target.isGameOver( controls.getObject() );
 					if ( done ) {
-						console.log("Game Done");
+						// console.log("Game Done");
 						controls.enabled = false;
 						blocker.style.display = 'block';
 						instructions.style.display = '';
