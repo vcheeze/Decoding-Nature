@@ -13,4 +13,12 @@ class Path {
 
   	scene.add( this.mesh );
   }
+
+  playerOutOfBounds( player ) {
+    if ( player.position.x >= window.innerWidth/8 || player.position.x <= -window.innerWidth/8 ||
+         player.position.y >= window.innerHeight/8 || player.position.y <= -window.innerHeight/8) {
+      return true;
+    }
+    return false;
+  }
 }
