@@ -119,6 +119,7 @@
 				document.addEventListener( 'webkitpointerlockerror', pointerlockerror, false );
 
 				instructions.addEventListener( 'click', function ( event ) {
+					console.log("Start the game");
 					instructions.style.display = 'none';
 
 					// Ask the browser to lock the pointer
@@ -130,6 +131,9 @@
 			} else {
 				instructions.innerHTML = 'Your browser doesn\'t seem to support Pointer Lock API';
 			}
+
+			// controlsEnabled = true;
+			// document.body.requestPointerLock();
 
 			init();
 			animate();
@@ -147,6 +151,7 @@
 			var velocity = new THREE.Vector3();
 			var direction = new THREE.Vector3();
 
+			var done = false;
 			var isGameOver = false;
 			var isDead = false;
 
@@ -162,6 +167,7 @@
 				scene.add( light );
 
 				controls = new THREE.PointerLockControls( camera );
+				// controls.enabled = true;
 				scene.add( controls.getObject() );
 
 				path = new Path( scene );
@@ -252,7 +258,6 @@
 
 			function restart() {
 				camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
-				// camera.position.z = 100;
 				camera.position.set( 0, 0, 0 );
 
 				var light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
@@ -316,7 +321,16 @@
 						};
 					}
 
-					isGameOver = target.isGameOver( controls.getObject() );
+					done = target.isGameOver( controls.getObject() );
+					if ( done ) {
+						console.log("Game Done");
+						controls.enabled = false;
+						blocker.style.display = 'block';
+						instructions.style.display = '';
+						instructions.innerHTML = "Your last clue is: E";
+
+						isGameOver = true;
+					}
 
 					prevTime = time;
 
