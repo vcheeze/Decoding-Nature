@@ -173,10 +173,12 @@
 				path = new Path( scene );
 
 				// create a starfield that blocks the center
-				let starField = new StarField( scene, true );
-				starFields.push( starField );
+				for ( let i = 0; i < 3; i++ ) {
+					let starField = new StarField( scene, true );
+					starFields.push( starField );
+				}
 				// create the rest of the stars fields
-				for ( let i = 0; i < 1; i++ ) {
+				for ( let i = 0; i < 7; i++ ) {
 					let starField = new StarField( scene, false );
 					starFields.push( starField );
 				}
@@ -273,10 +275,12 @@
 				path = new Path( scene );
 
 				// create a starfield that blocks the center
-				let starField = new StarField( scene, true );
-				starFields.push( starField );
+				for ( let i = 0; i < 3; i++ ) {
+					let starField = new StarField( scene, true );
+					starFields.push( starField );
+				}
 				// create the rest of the stars fields
-				for ( let i = 0; i < 1	; i++ ) {
+				for ( let i = 0; i < 7; i++ ) {
 					let starField = new StarField( scene, false );
 					starFields.push( starField );
 				}
@@ -319,10 +323,13 @@
 						isDead = starFields[i].processPlayerDistance( controls.getObject() ) ||
 										 path.playerOutOfBounds( controls.getObject() );
 						if ( isDead ) {
+							for ( let j = 0; j < starFields.length; j++ ) {
+								starFields[j].destroyStars();
+							}
 							while(scene.children.length > 0){
 						    scene.remove(scene.children[0]);
 							}
-							// restart();
+							restart();
 							isDead = false;
 						};
 					}

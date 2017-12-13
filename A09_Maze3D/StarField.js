@@ -5,8 +5,8 @@ class StarField {
     // set a random position
     if ( !block ) {
       this.position = new THREE.Vector3(
-        THREE.Math.randInt( -window.innerWidth/4, window.innerWidth/4 ),
-        THREE.Math.randInt( -window.innerHeight/4, window.innerHeight/4 ),
+        THREE.Math.randInt( -window.innerWidth/8, window.innerWidth/8 ),
+        THREE.Math.randInt( -window.innerHeight/8, window.innerHeight/8 ),
         THREE.Math.randInt( -350, -150 )
       );
 
@@ -70,5 +70,9 @@ class StarField {
         this.stars[i].visible = false;
       }
     }
+  }
+
+  destroyStars() {
+    this.stars.length = 0;
   }
 }
