@@ -21,7 +21,7 @@ class Target {
     if ( player.position.x >= -25  && player.position.x <= 25 &&
          player.position.y >= -25  && player.position.y <= 25 &&
          player.position.z >= -375 && player.position.z <= -325) {
-      console.log("Win!")
+      // console.log("Win!");
       return true;
     }
     return false;

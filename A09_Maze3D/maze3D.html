@@ -172,9 +172,12 @@
 
 				path = new Path( scene );
 
-				// create the stars fields
-				for ( let i = 0; i < 25; i++ ) {
-					let starField = new StarField( scene );
+				// create a starfield that blocks the center
+				let starField = new StarField( scene, true );
+				starFields.push( starField );
+				// create the rest of the stars fields
+				for ( let i = 0; i < 1; i++ ) {
+					let starField = new StarField( scene, false );
 					starFields.push( starField );
 				}
 
@@ -269,9 +272,12 @@
 
 				path = new Path( scene );
 
-				// create the stars fields
-				for ( let i = 0; i < 25; i++ ) {
-					let starField = new StarField( scene );
+				// create a starfield that blocks the center
+				let starField = new StarField( scene, true );
+				starFields.push( starField );
+				// create the rest of the stars fields
+				for ( let i = 0; i < 1	; i++ ) {
+					let starField = new StarField( scene, false );
 					starFields.push( starField );
 				}
 
@@ -316,7 +322,7 @@
 							while(scene.children.length > 0){
 						    scene.remove(scene.children[0]);
 							}
-							restart();
+							// restart();
 							isDead = false;
 						};
 					}
@@ -327,7 +333,7 @@
 						controls.enabled = false;
 						blocker.style.display = 'block';
 						instructions.style.display = '';
-						instructions.innerHTML = "Your last clue is: E";
+						instructions.innerHTML = "Good job. You have reached your destination.";
 
 						isGameOver = true;
 					}
